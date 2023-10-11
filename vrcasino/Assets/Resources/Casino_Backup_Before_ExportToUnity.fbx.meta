@@ -3,7 +3,42 @@ guid: 840b14c4dcc13e148b88190af112b690
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlackHole
+    second: {fileID: 2100000, guid: 3397d78f00e650d46a55d358019c59a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedCarpet
+    second: {fileID: 2100000, guid: 4f1089e95ae4ef741958a01bdaa857e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RedWalls
+    second: {fileID: 2100000, guid: 4e986bab0ac0a354694d4d404e152f7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: dca52ca6b5ad19a4b809000cb0011e76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone2
+    second: {fileID: 2100000, guid: b9a2fc5661eae214990afad443700144, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: da3154c9aeb0b90429a336feca357c92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood2
+    second: {fileID: 2100000, guid: 01d17cc937565b049937a4c07faad55f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
