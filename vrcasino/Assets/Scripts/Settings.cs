@@ -11,8 +11,6 @@ public class Settings : MonoBehaviour
     private double movementSpeed;
     [SerializeField]
     private double audioVolume;
-    [SerializeField]
-    private ActionBasedControllerManager actionManager;
 
     // Start is called before the first frame update
     void Start()
