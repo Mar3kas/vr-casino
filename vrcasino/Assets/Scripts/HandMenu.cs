@@ -80,4 +80,10 @@ public class HandMenu : MonoBehaviour
         disableSettingsMenuCanvas();
         enableHandMenuCanvas();
     }
+
+    private void OnDestroy()
+    {
+        menuInputAction = inputActions.FindActionMap("XRI LeftHand").FindAction("Menu");
+        menuInputAction.performed -= toggleMenu;
+    }
 }
