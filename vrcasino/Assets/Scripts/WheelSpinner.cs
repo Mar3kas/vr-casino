@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WheelSpinner : MonoBehaviour
@@ -30,6 +28,7 @@ public class WheelSpinner : MonoBehaviour
             transform.Rotate(Vector3.forward, initialRotationSpeed * Time.fixedDeltaTime);
             boneTransform.Rotate(Vector3.forward, initialRotationSpeed * Time.fixedDeltaTime);
             initialRotationSpeed -= decelaration * Time.fixedDeltaTime;
+
             if (initialRotationSpeed <= 0f)
             {
                 isSpinning = false;
@@ -45,9 +44,10 @@ public class WheelSpinner : MonoBehaviour
         {
             Destroy(instantiatedBall);
         }
+
         isSpinning = true;
         initialRotationSpeed = 720f;
-        instantiatedBall = Instantiate(ballPrefab, new Vector3(-7.039f, 2.774f, 15.7959f), ballPrefab.transform.rotation);
+        instantiatedBall = Instantiate(ballPrefab, new Vector3(-6.841f, 2.774f, 15.7959f), ballPrefab.transform.rotation);
         Rigidbody ballRigidbody = instantiatedBall.GetComponent<Rigidbody>();
         ballRigidbody.AddForce(Vector3.left, ForceMode.Impulse);
     }
