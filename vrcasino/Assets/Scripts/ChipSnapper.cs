@@ -8,6 +8,15 @@ public class ChipSnapper : MonoBehaviour
     private LayerMask layerMask;
     [SerializeField]
     private bool positionSet = false;
+    [SerializeField]
+    private int chipValue = 5;
+
+    private Roulette roulette;
+
+    private void Start()
+    {
+        roulette = GameObject.Find("roulette").GetComponent<Roulette>();
+    }
 
     void Update()
     {
@@ -17,6 +26,7 @@ public class ChipSnapper : MonoBehaviour
             if (nearestCollider != null)
             {
                 snapToColliderCenter(nearestCollider);
+                addToBets(nearestCollider.gameObject.name);
                 positionSet = true;
             }
         }
@@ -49,11 +59,46 @@ public class ChipSnapper : MonoBehaviour
         transform.position = new Vector3(center.x, transform.position.y, center.z);
     }
 
+    private void addToBets(string betCellName)
+    {
+        Debug.Log("Adding");
+        if (!roulette.bets.ContainsKey(betCellName))
+        {
+            roulette.bets.Add(betCellName, chipValue);
+        }
+        else
+        {
+            roulette.bets[betCellName] = roulette.bets[betCellName] + chipValue;
+        }
+        foreach (KeyValuePair<string, int> kvp in roulette.bets)
+        {
+            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+        }
+    }
+
+    private void removeFromBets(string betCellName)
+    {
+        Debug.Log("Removing");
+        if (roulette.bets[betCellName] - chipValue <= 0)
+        {
+            roulette.bets.Remove(betCellName);
+        }
+        else
+        {
+            roulette.bets[betCellName] = roulette.bets[betCellName] - chipValue;
+        }
+        foreach (KeyValuePair<string, int> kvp in roulette.bets)
+        {
+            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("BetCell"))
         {
             positionSet = false;
+            removeFromBets(other.gameObject.name);
         }
     }
 }
