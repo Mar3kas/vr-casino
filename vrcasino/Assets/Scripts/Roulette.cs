@@ -1,5 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Tutorials.Core.Editor;
 using UnityEngine;
 
 public class Roulette : MonoBehaviour
@@ -7,6 +8,8 @@ public class Roulette : MonoBehaviour
     public Dictionary<string, int> bets = new Dictionary<string, int>();
     public Dictionary<string, int> winningMultipliers = new Dictionary<string, int>();
     private WheelSpinner wheelSpinner;
+    private int winnings;
+    string[] splitWinningCell = { };
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +25,6 @@ public class Roulette : MonoBehaviour
         {
             wheelSpinner.finishedSpinning = false;
             calculateWinnings();
-
         }
     }
 
@@ -45,13 +47,12 @@ public class Roulette : MonoBehaviour
 
     private void calculateWinnings()
     {
-        int totalWinnings = 0;
-        totalWinnings += calculateStraightUpWinnings();
-        totalWinnings += calculateColorWinnings();
-        totalWinnings += calculateEvenOddWinnings();
-        totalWinnings += calculateThirdsWinnings();
-        totalWinnings += calculateHalfWinnings();
-        Debug.Log(totalWinnings);
+        winnings = 0;
+        winnings += calculateStraightUpWinnings();
+        winnings += calculateColorWinnings();
+        winnings += calculateEvenOddWinnings();
+        winnings += calculateThirdsWinnings();
+        winnings += calculateHalfWinnings();
         wheelSpinner.winningCell = "";
     }
 
@@ -59,7 +60,7 @@ public class Roulette : MonoBehaviour
     {
         int winnings = 0;
 
-        string[] splitWinningCell = wheelSpinner.winningCell.Split(".");
+        splitWinningCell = wheelSpinner.winningCell.Split(".");
         string number = splitWinningCell[1];
 
         foreach(KeyValuePair<string, int> kvp in bets)
@@ -77,7 +78,7 @@ public class Roulette : MonoBehaviour
     {
         int winnings = 0;
 
-        string[] splitWinningCell = wheelSpinner.winningCell.Split(".");
+        splitWinningCell = wheelSpinner.winningCell.Split(".");
         string color = splitWinningCell[2];
 
         foreach (KeyValuePair<string, int> kvp in bets)
@@ -95,7 +96,7 @@ public class Roulette : MonoBehaviour
     {
         int winnings = 0;
 
-        string[] splitWinningCell = wheelSpinner.winningCell.Split(".");
+        splitWinningCell = wheelSpinner.winningCell.Split(".");
         string evenOdd = int.Parse(splitWinningCell[1]) % 2 == 0 ? "even" : "odd";
 
         foreach (KeyValuePair<string, int> kvp in bets)
@@ -113,7 +114,7 @@ public class Roulette : MonoBehaviour
     {
         int winnings = 0;
 
-        string[] splitWinningCell = wheelSpinner.winningCell.Split(".");
+        splitWinningCell = wheelSpinner.winningCell.Split(".");
         int number = int.Parse(splitWinningCell[1]);
         string third = "";
 
@@ -146,7 +147,7 @@ public class Roulette : MonoBehaviour
     {
         int winnings = 0;
 
-        string[] splitWinningCell = wheelSpinner.winningCell.Split(".");
+        splitWinningCell = wheelSpinner.winningCell.Split(".");
         int number = int.Parse(splitWinningCell[1]);
         string half = "";
 
@@ -169,5 +170,34 @@ public class Roulette : MonoBehaviour
         }
 
         return winnings;
+    }
+
+    public int GetWinnings()
+    {
+        return winnings;
+    }
+
+    public int GetTotalPlaced()
+    {
+        int totalPlaced = 0;
+
+        foreach (KeyValuePair<string, int> kvp in bets)
+        {
+            totalPlaced += kvp.Value;
+        }
+
+        return totalPlaced;
+    }
+
+    public string GetWinningBet()
+    {
+        string result = string.Join(" ", splitWinningCell.Skip(1));
+
+        if (string.IsNullOrEmpty(result))
+        {
+            return "TBD";
+        }
+
+        return result;
     }
 }
