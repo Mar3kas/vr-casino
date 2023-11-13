@@ -9,6 +9,11 @@ public class HandMenu : MonoBehaviour
     private Canvas handMenuCanvas;
     [SerializeField]
     private Canvas settingsMenuCanvas;
+    [SerializeField]
+    private Canvas walletMenuCanvas;
+    [SerializeField]
+    private Player player;
+
     private InputAction menuInputAction;
 
     // Start is called before the first frame update
@@ -19,6 +24,7 @@ public class HandMenu : MonoBehaviour
         menuInputAction.performed += toggleMenu;
         disableHandMenuCanvas();
         disableSettingsMenuCanvas();
+        DisableWalletMenuCanvas();
     }
 
     void enableHandMenuCanvas()
@@ -41,19 +47,33 @@ public class HandMenu : MonoBehaviour
         settingsMenuCanvas.enabled = false;
     }
 
+    void EnableWalletMenuCanvas()
+    {
+        walletMenuCanvas.enabled = true;
+    }
+
+    void DisableWalletMenuCanvas()
+    {
+        walletMenuCanvas.enabled = false;
+    }
+
     void toggleMenu(InputAction.CallbackContext context)
     {
-        if (!handMenuCanvas.enabled && !settingsMenuCanvas.enabled)
+        if (!handMenuCanvas.enabled && !settingsMenuCanvas.enabled && !walletMenuCanvas.enabled)
         {
             enableHandMenuCanvas();
         }
-        else if (handMenuCanvas.enabled && !settingsMenuCanvas.enabled)
+        else if (handMenuCanvas.enabled && !settingsMenuCanvas.enabled && !walletMenuCanvas.enabled)
         {
             disableHandMenuCanvas();
         }
-        else if (!handMenuCanvas.enabled && settingsMenuCanvas.enabled)
+        else if (!handMenuCanvas.enabled && settingsMenuCanvas.enabled && !walletMenuCanvas.enabled)
         {
             disableSettingsMenuCanvas();
+        }
+        else if (!handMenuCanvas.enabled && !settingsMenuCanvas.enabled && walletMenuCanvas.enabled)
+        {
+            DisableWalletMenuCanvas();
         }
     }
 
@@ -68,9 +88,17 @@ public class HandMenu : MonoBehaviour
         enableSettingsMenuCanvas();
     }
 
+    public void EnableWalletMenu()
+    {
+        disableHandMenuCanvas();
+        EnableWalletMenuCanvas();
+        player.UpdatePlayerChipText();
+    }
+
     public void backToHandMenu()
     {
         disableSettingsMenuCanvas();
+        DisableWalletMenuCanvas();
         enableHandMenuCanvas();
     }
 

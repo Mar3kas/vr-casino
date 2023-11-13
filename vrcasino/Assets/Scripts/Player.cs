@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,8 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    TextMeshProUGUI playerMoneyText;
-
+    TextMeshProUGUI playerCashText;
+    [SerializeField]
+    TextMeshProUGUI playerChipText;
     [SerializeField]
     int money;
 
@@ -16,17 +16,22 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerMoneyText.text = "Cash: " + money;
+        playerCashText.text = "Cash: " + money;
         wallet.Add(5, 0);
         wallet.Add(10, 0);
         wallet.Add(15, 0);
         wallet.Add(20, 0);
+        UpdatePlayerChipText();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdatePlayerChipText()
     {
-        
+        playerChipText.text = "";
+
+        foreach (var entry in wallet)
+        {
+            playerChipText.text += $"{entry.Key} chip: {entry.Value}\n";
+        }
     }
 
     public void setWallet(Dictionary<int, int> source)
