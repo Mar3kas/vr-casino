@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Tutorials.Core.Editor;
 using UnityEngine;
 
 public class Roulette : MonoBehaviour
 {
+    [SerializeField]
+    private DisplayGameInfo infoDisplay;
     public Dictionary<string, int> bets = new Dictionary<string, int>();
     public Dictionary<string, int> winningMultipliers = new Dictionary<string, int>();
     private WheelSpinner wheelSpinner;
@@ -25,6 +26,7 @@ public class Roulette : MonoBehaviour
         {
             wheelSpinner.finishedSpinning = false;
             calculateWinnings();
+            infoDisplay.updateRouletteStandText();
         }
     }
 

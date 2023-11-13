@@ -41,7 +41,7 @@ public class ExchangeMenuScript : MonoBehaviour
             wallet[amount] += 1;
             changeTotalAmountTextField(amount);
             player.setMoney(player.getMoney() - amount);
-            playerMoneyText.text = "Money: " + player.getMoney();
+            playerMoneyText.text = "Cash: " + player.getMoney();
         }
     }
 
@@ -86,5 +86,9 @@ public class ExchangeMenuScript : MonoBehaviour
         wallet[10] = 0;
         wallet[15] = 0;
         wallet[20] = 0;
+        if (playerMoneyText.IsActive())
+        {
+            player.UpdatePlayerChipText();
+        }
     }
 }

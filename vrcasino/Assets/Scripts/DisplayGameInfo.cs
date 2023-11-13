@@ -17,6 +17,13 @@ public class DisplayGameInfo : MonoBehaviour
         roulette = GameObject.Find("roulette").GetComponent<Roulette>();
     }
 
+    public void updateRouletteStandText()
+    {
+        betAmount.text = $"Bet Amount: {roulette.GetTotalPlaced()}";
+        winnings.text = $"Won/Lost: {roulette.GetWinnings()}";
+        winningBet.text = $"Won Bet: {roulette.GetWinningBet()}";
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -33,9 +40,7 @@ public class DisplayGameInfo : MonoBehaviour
             winnings = spawnedObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             winningBet = spawnedObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
 
-            betAmount.text = $"Bet Amount: {roulette.GetTotalPlaced()}";
-            winnings.text = $"Won/Lost: {roulette.GetWinnings()}";
-            winningBet.text = $"Won Bet: {roulette.GetWinningBet()}";
+            updateRouletteStandText();
         }
     }
 

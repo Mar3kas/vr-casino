@@ -9,6 +9,8 @@ public class ChipSnapper : MonoBehaviour
     private bool positionSet = false;
     [SerializeField]
     private int chipValue = 5;
+    [SerializeField]
+    private DisplayGameInfo infoDisplay;
 
     private Roulette roulette;
 
@@ -69,10 +71,7 @@ public class ChipSnapper : MonoBehaviour
         {
             roulette.bets[betCellName] = roulette.bets[betCellName] + chipValue;
         }
-        foreach (KeyValuePair<string, int> kvp in roulette.bets)
-        {
-            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
-        }
+        infoDisplay.updateRouletteStandText();
     }
 
     private void removeFromBets(string betCellName)
@@ -86,10 +85,7 @@ public class ChipSnapper : MonoBehaviour
         {
             roulette.bets[betCellName] = roulette.bets[betCellName] - chipValue;
         }
-        foreach (KeyValuePair<string, int> kvp in roulette.bets)
-        {
-            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
-        }
+        infoDisplay.updateRouletteStandText();
     }
 
     private void OnTriggerExit(Collider other)

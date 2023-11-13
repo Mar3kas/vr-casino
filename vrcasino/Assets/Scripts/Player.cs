@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
         wallet.Add(10, 0);
         wallet.Add(15, 0);
         wallet.Add(20, 0);
-        UpdatePlayerChipText();
     }
 
     public void UpdatePlayerChipText()
@@ -36,10 +35,9 @@ public class Player : MonoBehaviour
 
     public void setWallet(Dictionary<int, int> source)
     {
-        wallet = source;
-        foreach (KeyValuePair<int, int> pair in wallet)
+        foreach (KeyValuePair<int, int> kvp in source)
         {
-            Debug.Log(pair.Key + ":" + pair.Value);
+            wallet[kvp.Key] += kvp.Value;
         }
     }
 
