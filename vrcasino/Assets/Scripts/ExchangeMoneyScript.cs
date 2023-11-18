@@ -1,12 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ExchangeMenuScript : MonoBehaviour
+public class ExchangeMoneyScript : MonoBehaviour
 {
     [SerializeField]
-    TextMeshProUGUI playerMoneyText;
+    TextMeshProUGUI playerChipText;
+
+    [SerializeField]
+    TextMeshProUGUI playerCashText;
 
     [SerializeField]
     TextMeshProUGUI fiveUIAmount;
@@ -41,7 +43,7 @@ public class ExchangeMenuScript : MonoBehaviour
             wallet[amount] += 1;
             changeTotalAmountTextField(amount);
             player.setMoney(player.getMoney() - amount);
-            playerMoneyText.text = "Cash: " + player.getMoney();
+            player.UpdatePlayerMoney();
         }
     }
 
@@ -52,7 +54,7 @@ public class ExchangeMenuScript : MonoBehaviour
             wallet[amount] -= 1;
             changeTotalAmountTextField(amount);
             player.setMoney(player.getMoney() + amount);
-            playerMoneyText.text = "Cash: " + player.getMoney();
+            player.UpdatePlayerMoney();
         }
     }
 
@@ -86,9 +88,11 @@ public class ExchangeMenuScript : MonoBehaviour
         wallet[10] = 0;
         wallet[15] = 0;
         wallet[20] = 0;
-        if (playerMoneyText.IsActive())
+
+        if (playerChipText.IsActive() || playerCashText.IsActive())
         {
             player.UpdatePlayerChipText();
+            player.UpdatePlayerMoney();
         }
     }
 }
