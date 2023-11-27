@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System.Linq;
 
 public class ExchangeChipScript : MonoBehaviour
 {
@@ -29,18 +30,21 @@ public class ExchangeChipScript : MonoBehaviour
     Dictionary<int, int> wallet = new Dictionary<int, int>();
     int totalExchangeMoney = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         wallet.Add(5, 0);
         wallet.Add(10, 0);
         wallet.Add(15, 0);
         wallet.Add(20, 0);
+    }
+
+    public void SetInitialChipAmounts()
+    {
         SetWallet(player.GetWallet());
 
         for (int i = 1; i <= 4; i++)
         {
-            ChangeTotalAmountTextField(i*5);
+            ChangeTotalAmountTextField(i * 5);
         }
     }
 
@@ -48,7 +52,7 @@ public class ExchangeChipScript : MonoBehaviour
     {
         foreach (KeyValuePair<int, int> kvp in source)
         {
-            wallet[kvp.Key] += kvp.Value;
+            wallet[kvp.Key] = kvp.Value;
         }
     }
 
@@ -95,18 +99,22 @@ public class ExchangeChipScript : MonoBehaviour
 
     public void ConfirmChipExchange()
     {
-        fiveUIAmount.text = "Total: " + player.GetValue(5);
-        tenUIAmount.text = "Total: " + player.GetValue(10);
-        fifteenUIAmount.text = "Total: " + player.GetValue(15);
-        twentyUIAmount.text = "Total: " + player.GetValue(20);
-
-        player.setWallet(wallet);
-        player.setMoney(totalExchangeMoney);
-
-        if (playerChipText.IsActive() || playerCashText.IsActive())
+        if (totalExchangeMoney != 0)
         {
-            player.UpdatePlayerChipText();
-            player.UpdatePlayerMoney();
+            player.setWallet(wallet);
+            player.addMoney(totalExchangeMoney);
+
+            if (playerChipText.IsActive() || playerCashText.IsActive())
+            {
+                player.UpdatePlayerChipText();
+                player.UpdatePlayerMoney();
+            }
+
+            fiveUIAmount.text = "Total: " + player.GetValue(5);
+            tenUIAmount.text = "Total: " + player.GetValue(10);
+            fifteenUIAmount.text = "Total: " + player.GetValue(15);
+            twentyUIAmount.text = "Total: " + player.GetValue(20);
+            totalExchangeMoney = 0;
         }
     }
 }

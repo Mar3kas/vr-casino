@@ -83,7 +83,7 @@ public class ExchangeMoneyScript : MonoBehaviour
         tenUIAmount.text = "Total: 0";
         fifteenUIAmount.text = "Total: 0";
         twentyUIAmount.text = "Total: 0";
-        player.setWallet(wallet);
+        player.addToWallet(wallet);
         wallet[5] = 0;
         wallet[10] = 0;
         wallet[15] = 0;

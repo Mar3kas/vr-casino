@@ -6,6 +6,10 @@ public class Roulette : MonoBehaviour
 {
     [SerializeField]
     private DisplayGameInfo infoDisplay;
+    [SerializeField]
+    private AudioSource winAudioSource;
+    [SerializeField]
+    private AudioSource lossAudioSource;
     public Dictionary<string, int> bets = new Dictionary<string, int>();
     public Dictionary<string, int> winningMultipliers = new Dictionary<string, int>();
     private WheelSpinner wheelSpinner;
@@ -27,6 +31,14 @@ public class Roulette : MonoBehaviour
             wheelSpinner.finishedSpinning = false;
             calculateWinnings();
             infoDisplay.updateRouletteStandText();
+            if (winnings == 0)
+            {
+                lossAudioSource.Play();
+            }
+            else
+            {
+                winAudioSource.Play();
+            }
         }
     }
 

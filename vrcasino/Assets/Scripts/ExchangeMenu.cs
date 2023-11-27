@@ -39,6 +39,7 @@ public class ExchangeMenu : MonoBehaviour
     void EnableChipExchangeMenuCanvas()
     {
         chipExchangeMenuCanvas.enabled = true;
+        chipExchangeMenuCanvas.GetComponent<ExchangeChipScript>().SetInitialChipAmounts();
     }
 
     void DisableChipExchangeMenuCanvas()

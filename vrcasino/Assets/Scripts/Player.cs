@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         playerCashText.text = "Cash: " + money;
     }
 
-    public void setWallet(Dictionary<int, int> source)
+    public void addToWallet(Dictionary<int, int> source)
     {
         foreach (KeyValuePair<int, int> kvp in source)
         {
@@ -46,9 +46,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void setWallet(Dictionary<int, int> source)
+    {
+        foreach (KeyValuePair<int, int> kvp in source)
+        {
+            wallet[kvp.Key] = kvp.Value;
+        }
+    }
+
     public void setMoney(int money)
     {
         this.money = money;
+    }
+
+    public void addMoney(int money)
+    {
+        this.money += money;
     }
 
     public int getMoney()
