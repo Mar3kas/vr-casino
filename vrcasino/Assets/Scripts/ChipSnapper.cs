@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChipSnapper : MonoBehaviour
@@ -95,5 +94,15 @@ public class ChipSnapper : MonoBehaviour
             positionSet = false;
             removeFromBets(other.gameObject.name);
         }
+    }
+
+    public int GetChipValue()
+    {
+        return chipValue;
+    }
+
+    public bool GetIsPositionSet()
+    {
+        return positionSet;
     }
 }

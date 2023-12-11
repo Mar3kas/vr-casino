@@ -10,6 +10,12 @@ public class Roulette : MonoBehaviour
     private AudioSource winAudioSource;
     [SerializeField]
     private AudioSource lossAudioSource;
+    [SerializeField]
+    private Player player;
+    [SerializeField]
+    private ChipSpawner chipSpawner;
+
+    private List<GameObject> spawned;
     public Dictionary<string, int> bets = new Dictionary<string, int>();
     public Dictionary<string, int> winningMultipliers = new Dictionary<string, int>();
     private WheelSpinner wheelSpinner;
@@ -33,11 +39,20 @@ public class Roulette : MonoBehaviour
             infoDisplay.updateRouletteStandText();
             if (winnings == 0)
             {
+                spawned = chipSpawner.GetSpawnedChips();
+                foreach (var chip in spawned)
+                {
+                    if (chip.GetComponent<ChipSnapper>().GetIsPositionSet())
+                    {
+                        Destroy(chip);
+                    }
+                }
                 lossAudioSource.Play();
             }
             else
             {
                 winAudioSource.Play();
+                player.addMoney(winnings);
             }
         }
     }
