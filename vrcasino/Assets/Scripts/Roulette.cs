@@ -39,21 +39,27 @@ public class Roulette : MonoBehaviour
             infoDisplay.updateRouletteStandText();
             if (winnings == 0)
             {
-                spawned = chipSpawner.GetSpawnedChips();
-                foreach (var chip in spawned)
-                {
-                    if (chip.GetComponent<ChipSnapper>().GetIsPositionSet())
-                    {
-                        Destroy(chip);
-                    }
-                }
                 lossAudioSource.Play();
             }
             else
             {
                 winAudioSource.Play();
                 player.addMoney(winnings);
+                player.UpdatePlayerMoney();
             }
+            spawned = chipSpawner.GetSpawnedChips();
+           for(int i = 0; i < spawned.Count; i++)
+            {
+                var chip = spawned[i];
+                if (chip.GetComponent<ChipSnapper>().GetIsPositionSet())
+                {
+                    player.GetWallet()[chip.GetComponent<ChipSnapper>().GetChipValue()] = player.GetWallet()[chip.GetComponent<ChipSnapper>().GetChipValue()] - 1;
+                    Destroy(chip);
+                    spawned.Remove(chip);
+                }
+            }
+            bets = new Dictionary<string, int>();
+            player.UpdatePlayerChipText();
         }
     }
 

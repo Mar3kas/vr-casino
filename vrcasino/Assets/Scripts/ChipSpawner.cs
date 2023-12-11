@@ -21,7 +21,7 @@ public class ChipSpawner : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         wallet = player.GetWallet();
-        if (other.CompareTag("Player") && !isSpawned)
+        if (other.CompareTag("Player"))
         {
             isSpawned = true;
             SpawnChips();
@@ -30,7 +30,7 @@ public class ChipSpawner : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && !isSpawned)
+        if (other.CompareTag("Player"))
         {
             isSpawned = false;
             DestroySpawnedChips();
@@ -39,6 +39,7 @@ public class ChipSpawner : MonoBehaviour
 
     private void SpawnChips()
     {
+        float zCoords = initialZ;
         foreach (var chip in chips)
         {
             int chipValue = chip.GetComponent<ChipSnapper>().GetChipValue();
@@ -50,11 +51,11 @@ public class ChipSpawner : MonoBehaviour
                 for (int i = 0; i < chipCount; i++)
                 {
                     float spawnY = initialY + i * 0.15f;
-                    GameObject spawnedChip = Instantiate(chip, new Vector3(initialX, spawnY, initialZ), Quaternion.identity);
+                    GameObject spawnedChip = Instantiate(chip, new Vector3(initialX, spawnY, zCoords), Quaternion.identity);
                     spawned.Add(spawnedChip);
                 }
 
-                initialZ += zOffset;
+                zCoords += zOffset;
             }
         }
     }

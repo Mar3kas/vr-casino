@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1809737, g: 0.2265341, b: 0.30726066, a: 1}
+  m_IndirectSpecularColor: {r: 0.18097398, g: 0.22653453, b: 0.30726156, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5581,8 +5581,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.272041, y: 0.72287714, z: 4.901738}
-  m_Center: {x: -1.5848968, y: -0.55442077, z: 1.4083428}
+  m_Size: {x: 9.917207, y: 0.72287714, z: 9.4682255}
+  m_Center: {x: -1.5608892, y: -0.55442077, z: 1.304491}
 --- !u!114 &433482099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23672,6 +23672,8 @@ MonoBehaviour:
   infoDisplay: {fileID: 433482097}
   winAudioSource: {fileID: 919132149167826180}
   lossAudioSource: {fileID: 919132149167826179}
+  player: {fileID: 33521525}
+  chipSpawner: {fileID: 433482099}
 --- !u!82 &919132149167826179
 AudioSource:
   m_ObjectHideFlags: 0
